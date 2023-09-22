@@ -1,5 +1,11 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 .App {
   text-align: center;
+  /* background-image: url("./images/Back.jpg"); */
 }
 
 .App-logo {
@@ -35,4 +41,24 @@
   to {
     transform: rotate(360deg);
   }
+}
+.lab{
+   font-size:17px;
+   font-weight: 500;
+}
+.cards{
+  border:none;
+}
+.con{
+  /* height: 100%; */
+  /* width: 100%; */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:cover;
+  background-position-y: top;
+  
+}
+.cards{
+   opacity: 10;
+   
 }
