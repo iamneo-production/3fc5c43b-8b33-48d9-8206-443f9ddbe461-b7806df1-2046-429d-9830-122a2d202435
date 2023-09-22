@@ -6,15 +6,9 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-// import {Router as useNavigate} from 'react-router-dom';
+
 export default function Header() {
-  // const navigate = useNavigate();
-
-  // const naviagtetologin = () => {
-  //   // 👇️ navigate to /contacts
-  //   navigate('/Login');
-  // };
-
+  
   
   return (
     <Box sx={{ flexGrow: 1 }}>

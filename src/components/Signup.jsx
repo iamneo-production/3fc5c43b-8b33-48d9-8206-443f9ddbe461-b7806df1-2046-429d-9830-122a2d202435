@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
-import {Card,Alert} from 'react-bootstrap';
-import {Row,Col}from 'react-bootstrap'
-import { Container } from 'react-bootstrap';
+import { Container,Card,Alert,Row,ColForm, Button  } from 'react-bootstrap';
 import {useNavigate} from 'react-router-dom'
 import '../App.css'
 function Signup() {
