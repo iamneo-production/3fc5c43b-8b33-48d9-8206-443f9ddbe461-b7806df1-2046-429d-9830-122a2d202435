@@ -1,88 +1,69 @@
-import React, { useState } from 'react';
-import { Container,Card,Alert,Row,ColForm, Button  } from 'react-bootstrap';
-import {useNavigate} from 'react-router-dom'
-import '../App.css'
-function Signup() {
-    const navigate = useNavigate();
+import React from 'react';
+import { Card, Form, Button, InputGroup, Row, Col } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-  const handleLoginClick = () => {
-    // Replace '/login' with the actual route to your login page
-    navigate('/login');
-  };
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // You can add your signup logic here
-    console.log('Form data submitted:', formData);
-  };
-
+function SignUp() {
   return (
-    <div className='con'>
-    <Container fluid>
-      <Card className='text-black m-5' style={{ borderRadius: '25px' }}>
-        <Card.Body>
-          <Row>
-            <Col md='10' lg='6' className='order-2 order-lg-1 d-flex flex-column align-items-center'>
-              <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+    <div className="log-det d-flex justify-content-center align-items-center vh-100">
+      <Card style={{ width: '400px' }}>
+        <Card.Body style={{ border: 'none' }}>
+          <Card.Title className="text-center">Sign Up</Card.Title>
+          <Form>
+            <Form.Group className="mb-3">
+              <Form.Label>Name</Form.Label>
+              <Form.Control type="text" placeholder="Enter your name" />
+            </Form.Group>
 
-              <div className="d-flex flex-row align-items-center mb-4">
-                <i className="fas fa-user me-3" style={{ fontSize: '1.5rem' }} />
-                <Form.Control type='text' placeholder='Your Name' className='w-100' />
+            <Form.Group className="mb-3">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control type="email" placeholder="Enter email" />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Password</Form.Label>
+              <Form.Control type="password" placeholder="Enter password" />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Confirm Password</Form.Label>
+              <Form.Control type="password" placeholder="Confirm password" />
+            </Form.Group>
+
+            <Row className="mx-3 mb-3">
+              <Col className="d-flex justify-content-between align-items-center">
+                <Form.Check type="checkbox" label="I agree to the terms and conditions" />
+              </Col>
+            </Row>
+
+            <Button variant="danger" onClick={()=>window.location.href="/login"} className="mb-4 w-100">Sign Up</Button>
+
+            <div className="text-center">
+              <p>Already a member? <Button onClick={()=>window.location.href="/login"} style={{color:'red',backgroundColor:'white',border:'none',marginBottom:'5px'}}>Sign in</Button></p>
+              <p>or sign up with:</p>
+
+              <div className="d-flex justify-content-between mx-auto" style={{ width: '40%' }}>
+                <Button variant="outline-danger" className="log-hov m-1">
+                  <i className="fa fa-facebook fa-face"></i>
+                </Button>
+
+                <Button variant="outline-danger" className="log-hov m-1">
+                  <i className="fa fa-twitter fa-twit"></i>
+                </Button>
+
+                <Button variant="outline-danger" className="log-hov m-1">
+                  <i className="fa fa-google fa-goog"></i>
+                </Button>
+
+                <Button variant="outline-danger" className="log-hov m-1">
+                  <i className="fa fa-github fa-gith"></i>
+                </Button>
               </div>
-
-              <div className="d-flex flex-row align-items-center mb-4">
-                <i className="fas fa-envelope me-3" style={{ fontSize: '1.5rem' }} />
-                <Form.Control type='email' placeholder='Your Email' />
-              </div>
-
-              <div className="d-flex flex-row align-items-center mb-4">
-                <i className="fas fa-lock me-3" style={{ fontSize: '1.5rem' }} />
-                <Form.Control type='password' placeholder='Password' />
-              </div>
-
-              <div className="d-flex flex-row align-items-center mb-4">
-                <i className="fas fa-key me-3" style={{ fontSize: '1.5rem' }} />
-                <Form.Control type='password' placeholder='Repeat your password' />
-              </div>
-
-              <div className='mb-4'>
-                <Form.Check type='checkbox' label='Subscribe to our newsletter' />
-              </div>
-
-              <Button className='mb-4' size='lg'>Register</Button>
-
-              <Alert variant="info" onClick={handleLoginClick} style={{ cursor: 'pointer' }}>
-                If you have an account, please 
-              </Alert>
-            </Col>
-
-            <Col md='10' lg='6' className='order-1 order-lg-2 d-flex align-items-center'>
-              <Card.Img src='https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp' fluid />
-            </Col>
-          </Row>
+            </div>
+          </Form>
         </Card.Body>
       </Card>
-    </Container>
-
-
-        
-      </div> 
-    
+    </div>
   );
 }
 
-export default Signup;
+export default SignUp;

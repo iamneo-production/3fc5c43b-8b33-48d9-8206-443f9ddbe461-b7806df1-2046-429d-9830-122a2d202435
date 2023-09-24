@@ -62,3 +62,47 @@
    opacity: 10;
    
 }
+.sep::before {
+  content: '|'; /* The vertical line separator */
+  margin: 0 10px; /* Adjust the spacing as needed */
+  color: #333; /* Color of the separator */
+}
+main-menu .navigation>nav>a:before {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 3px;
+  background: #2ac4cb;
+  content: "";
+}
+.adcon{
+    font-weight: 340;
+    font-size: 40px;
+    text-align: left;
+    margin-top: 70px;
+    margin-bottom: 50px;
+}
+.adcard{
+    border: none;
+}
+.adtex{
+    text-align: center;
+    
+}
+.tit-pay{
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.con-pay{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+}
+
+.log-hov:hover{
+   color:antiquewhite;
+    background-color: aliceblue;
+}
+.log-det{
+  background-image: url("../src/images/background.jpg");
+  background-repeat: no-repeat;
+}

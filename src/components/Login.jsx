@@ -1,53 +1,61 @@
 import React from 'react';
-import { Container, Row, Col, Card, Form, Button, Alert } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-
-function LoginForm() {
-  const navigate = useNavigate();
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    // Add your login logic here
-    console.log('Login button clicked');
-    // After successful login, you can navigate to another page
-    navigate('/Home'); // Replace '/dashboard' with the actual dashboard route
-  };
-
+import { Card, Form, Button, InputGroup, Row, Col } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+function App() {
   return (
-    <Container fluid>
-      <Card className='text-black m-5' style={{ borderRadius: '25px' }}>
-        <Card.Body>
-          <Row>
-            <Col md='10' lg='6' className='order-2 order-lg-1 d-flex flex-column align-items-center'>
-              <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Login</p>
+    <div className="log-det d-flex justify-content-center align-items-center vh-100">
+      <Card style={{ width: '400px' }}>
+        <Card.Body style={{border:'none'}}>
+          <Card.Title className="text-center">Sign In</Card.Title>
+          <Form>
+            <Form.Group className="mb-4">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control type="email" placeholder="Enter email" />
+            </Form.Group>
 
-              <div className="d-flex flex-row align-items-center mb-4">
-                <i className="fas fa-envelope me-3" style={{ fontSize: '1.5rem' }} />
-                <Form.Control type='email' placeholder='Your Email' />
+            <Form.Group className="mb-4">
+              <Form.Label>Password</Form.Label>
+              <Form.Control type="password" placeholder="Password" />
+            </Form.Group>
+
+            <Row className="mx-3 mb-4">
+              <Col className="d-flex justify-content-between align-items-center">
+                <Form.Check type="checkbox" label="Remember me" />
+                <a href="!#" style={{textDecoration:'none',color:'red'}}>Forgot password?</a>
+              </Col>
+            </Row>
+
+            <Button variant="danger" onClick={()=>window.location.href="/home"} className="mb-4 w-100">Sign in</Button>
+
+            <div className="text-center">
+              <p>Not a member? <Button onClick={()=>window.location.href="/signup"} style={{textDecoration:'none',color:'red',backgroundColor:'white',border:'none',marginBottom:'5px'}}>Register</Button></p>
+              <p>or sign up with:</p>
+
+              <div className="d-flex justify-content-between mx-auto" style={{ width: '40%' }}>
+                <Button variant="outline-danger" className="log-hov m-1">
+                 {/* <FontAwesomeIcon icon="coffee" size="lg" /> */}
+                 <i className="fa fa-facebook fa-face"></i>
+                 {/* <FontAwesomeIcon icon="fa-brands fa-facebook" /> */}
+                </Button>
+
+                <Button variant="outline-danger" className="log-hov m-1">
+                  <i className="fa fa-twitter fa-twit" ></i>
+                </Button>
+
+                <Button variant="outline-danger" className="log-hov m-1">
+                  <i className="fa fa-google fa-goog" ></i>
+                </Button>
+
+                <Button variant="outline-danger" className="log-hov m-1">
+                  <i className="fa fa-github fa-gith" ></i>
+                </Button>
               </div>
-
-              <div className="d-flex flex-row align-items-center mb-4">
-                <i className="fas fa-lock me-3" style={{ fontSize: '1.5rem' }} />
-                <Form.Control type='password' placeholder='Password' />
-              </div>
-
-              <Button onClick={handleLogin} className='mb-4' size='lg'>
-                Login
-              </Button>
-
-              <Button variant="info">
-              <span onClick={() => navigate('/Signup')} style={{ cursor: 'pointer' }}>Don't have an account?.Sign up</span> 
-              </Button>
-            </Col>
-
-            <Col md='10' lg='6' className='order-1 order-lg-2 d-flex align-items-center'>
-              <Card.Img src='https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp' fluid />
-            </Col>
-          </Row>
+            </div>
+          </Form>
         </Card.Body>
       </Card>
-    </Container>
+    </div>
   );
 }
 
-export default LoginForm;
+export default App;
