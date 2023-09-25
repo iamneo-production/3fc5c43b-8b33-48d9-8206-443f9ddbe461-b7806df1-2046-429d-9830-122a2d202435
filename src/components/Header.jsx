@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import '../App.css'
 import hicon from '../images/neo.png'
-function Headbar() {
+function Header() {
   const styles={
     color: '#61126B',
     fontWeight:'560',
@@ -33,7 +33,7 @@ function Headbar() {
     <Navbar expand="lg" className="bg-body-tertiary" style={{backgroundColor:'black'}}>
       <Container>
        
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="/home">
         <img src={hicon} 
         width="100"
         height="25"
@@ -47,7 +47,7 @@ function Headbar() {
             <Nav.Link href="/search" style={styles}>Book</Nav.Link>
             <Nav.Link href="#link" style={styles}>My Booking</Nav.Link>
             <Nav.Link href="#home" style={styles}>Check in</Nav.Link>
-            <Nav.Link href="#link" style={styles}>Flight status</Nav.Link>
+            <Nav.Link href="/reservation" style={styles}>Reservation</Nav.Link>
             <Nav.Link href="#home" style={navStyles}>Destination & onboard</Nav.Link>
             <Nav.Link href="#link" style={navStyles}>Help</Nav.Link>
             <Nav.Link href="#link" style={navStyles}>Flying club</Nav.Link>  
@@ -61,4 +61,4 @@ function Headbar() {
   );
 }
 
-export default Headbar;
+export default Header;

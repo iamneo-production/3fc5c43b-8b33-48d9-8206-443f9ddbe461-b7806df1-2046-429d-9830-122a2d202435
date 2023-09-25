@@ -1,8 +1,28 @@
 import React from 'react';
 import { Card, Form, Button, InputGroup, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import { toast, ToastContainer } from 'react-toastify';
+  import "react-toastify/dist/ReactToastify.css";
 function SignUp() {
+  const handleSignup=()=>{
+    window.location.href="/login";
+  }
+  const timeOut = () => {
+    toast.success('Sign up successful!', {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+      setTimeout(()=>{
+        handleSignup();
+      },3000);
+      
+  };
   return (
     <div className="log-det d-flex justify-content-center align-items-center vh-100">
       <Card style={{ width: '400px' }}>
@@ -35,7 +55,7 @@ function SignUp() {
               </Col>
             </Row>
 
-            <Button variant="danger" onClick={()=>window.location.href="/login"} className="mb-4 w-100">Sign Up</Button>
+            <Button variant="danger" onClick={timeOut} className="mb-4 w-100">Sign Up</Button>
 
             <div className="text-center">
               <p>Already a member? <Button onClick={()=>window.location.href="/login"} style={{color:'red',backgroundColor:'white',border:'none',marginBottom:'5px'}}>Sign in</Button></p>
