@@ -7,10 +7,10 @@ export default function Payboost() {
     <div>
     <Container className='mx-4'>
        <Row>
-        <Col className='p-2'>
-            <Image src={pay} alt="payments"/>
+        <Col className='d-flex justify-content-center p-2'>
+            <Image src={pay} alt="payments" fluid/>
         </Col>
-        <Col className='p-2'>
+        <Col className='d-flex justify-content-center p-2'>
              <div className='text-sec' style={{textAlign:'left'}}>
                  <h3 className='tit-pay'>Boost your balance every day</h3>
                  <br/>
@@ -24,7 +24,7 @@ export default function Payboost() {
                  </p>
                  <p className='con-pay'>
                     <a href='#' alt="red">
-                    <span class="btn btn-secondary">Show me more about neoair</span>
+                    <span class="btn btn-secondary" style={{backgroundColor:'red',border:'none',fontWeight:'bold'}}>Show me more about neoair</span>
                     </a>
                  </p>
              </div>

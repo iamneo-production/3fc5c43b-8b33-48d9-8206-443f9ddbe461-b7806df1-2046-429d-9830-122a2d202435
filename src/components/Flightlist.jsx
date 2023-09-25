@@ -1,60 +1,53 @@
 import React from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import Header from './Header';
+import adc2 from '../images/Air2.jpg';
+import adc1 from '../images/Air1.avif';
+import adc3 from '../images/Air3.avif';
+import '../components/styles/Flightlist.css'
+const PromotionalCard = ({ imgSrc, title, text }) => (
+  <Col md={4} className='d-flex justify-content-center'>
+    <Card className='cardd' style={{ border: 'none' }}>
+      <Card.Img className='cardImg' variant="top" src={imgSrc}/>
+      <Card.Body className='card-bod'>
+        <Card.Title>{title}</Card.Title>
+        <Card.Text>
+          {text}
+        </Card.Text>
+        <Button variant="primary" onClick={()=>window.location.href="/flightlist/seats"}>Book a seat</Button>
+      </Card.Body>
+    </Card>
+  </Col>
+);
 
 const FlightList = () => {
-  const flights = [
-    {
-      id: 1,
-      airline: 'Airline 1',
-      departure: 'City A',
-      arrival: 'City B',
-      departureTime: '08:00 AM',
-      arrivalTime: '10:00 AM',
-      duration: '2h 0m',
-      price: '$200',
-    },
-    {
-      id: 2,
-      airline: 'Airline 2',
-      departure: 'City B',
-      arrival: 'City C',
-      departureTime: '11:00 AM',
-      arrivalTime: '01:00 PM',
-      duration: '2h 0m',
-      price: '$250',
-    },
-    {
-      id: 3,
-      airline: 'Airline 3',
-      departure: 'City A',
-      arrival: 'City C',
-      departureTime: '02:00 PM',
-      arrivalTime: '04:00 PM',
-      duration: '2h 0m',
-      price: '$180',
-    },
-  ];
-
-  return (
-    <div className="flight-list">
-      {flights.map((flight) => (
-        <Card key={flight.id} className="mb-3">
-          <Card.Body>
-            <Card.Title>{flight.airline}</Card.Title>
-            <Card.Text>
-              <div>Departure: {flight.departure}</div>
-              <div>Arrival: {flight.arrival}</div>
-              <div>Departure Time: {flight.departureTime}</div>
-              <div>Arrival Time: {flight.arrivalTime}</div>
-              <div>Duration: {flight.duration}</div>
-              <div>Price: {flight.price}</div>
-            </Card.Text>
-            <Button variant="primary">Book Now</Button>
-          </Card.Body>
-        </Card>
-      ))}
-    </div>
-  );
+  // Flight data remains the same
 };
 
-export default FlightList;
+const Home = () => (
+  <div>
+    <Header />
+    <Container className='mt-4 pt-3 px-0' style={{ backgroundColor: '#F5F5F5' }}>
+      <Row>
+        <PromotionalCard
+          imgSrc={adc1}
+          title="Express Airlines"
+          text="It's free! And you can start earning from your very first flight with us or any of our airline partners."
+        />
+        <PromotionalCard
+          imgSrc={adc2}
+          title="Air India"
+          text="It's free! And you can start earning from your very first flight with us or any of our airline partners."
+        />
+        <PromotionalCard
+          imgSrc={adc3}
+          title="Singapore Airlines"
+          text="It's free! And you can start earning from your very first flight with us or any of our airline partners."
+        />
+      </Row>
+    </Container>
+    <FlightList />
+  </div>
+);
+
+export default Home;

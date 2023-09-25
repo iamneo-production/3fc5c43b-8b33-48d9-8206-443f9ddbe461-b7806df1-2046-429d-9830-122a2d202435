@@ -1,9 +1,32 @@
 import React from 'react';
 import { Card, Form, Button, InputGroup, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import React from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+  import "react-toastify/dist/ReactToastify.css";
 function App() {
+  const handleLogin=()=>{
+    window.location.href="/home";
+  }
+  const timeOut = () => {
+    toast.success('Sign in successful!', {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+      setTimeout(()=>{
+        handleLogin();
+      },3000);
+      
+  };
   return (
     <div className="log-det d-flex justify-content-center align-items-center vh-100">
+      
       <Card style={{ width: '400px' }}>
         <Card.Body style={{border:'none'}}>
           <Card.Title className="text-center">Sign In</Card.Title>
@@ -25,8 +48,12 @@ function App() {
               </Col>
             </Row>
 
-            <Button variant="danger" onClick={()=>window.location.href="/home"} className="mb-4 w-100">Sign in</Button>
-
+            <Button variant="danger" 
+            
+            onClick={timeOut} 
+            className="mb-4 w-100">
+              Sign in
+            </Button>
             <div className="text-center">
               <p>Not a member? <Button onClick={()=>window.location.href="/signup"} style={{textDecoration:'none',color:'red',backgroundColor:'white',border:'none',marginBottom:'5px'}}>Register</Button></p>
               <p>or sign up with:</p>
