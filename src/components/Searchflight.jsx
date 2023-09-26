@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Grid, Typography, TextField, Button } from '@mui/material';
 import Headbar from './Header';
+import Footer from './Footer';
 
-function Searchflight() {
+function SearchFlight() {
   const [origin, setOrigin] = useState('');
   const [destination, setDestination] = useState('');
   const [departureDate, setDepartureDate] = useState('');
@@ -18,69 +19,76 @@ function Searchflight() {
     console.log('Return Date:', returnDate);
   };
 
-  const labelStyle = {
-    fontWeight: 'bold',
-    // Add any other styles you need here
-  };
-
   return (
     <div>
-        <Headbar/>
-        <Container fluid className="bg-light min-vh-100 d-flex justify-content-center align-items-center">
-      <Row className="justify-content-center">
-        <Col>
-          <div className="bg-white p-4 rounded shadow">
-            <h2 className="text-center mb-4">Flight Reservation</h2>
-            <Form onSubmit={handleSubmit}>
-              <Form.Group controlId="origin">
-                <Form.Label style={labelStyle}>Origin</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter origin"
+      <Headbar />
+      <Container>
+        <Grid container justifyContent="center" alignItems="center" style={{ minHeight: '70vh' }}>
+          <Grid item xs={12} sm={8} md={6}>
+            <div style={{ backgroundColor: 'white', padding: '16px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)' }}>
+              <Typography variant="h4" align="center" gutterBottom>
+                Flight Reservation
+              </Typography>
+              <form onSubmit={handleSubmit}>
+                <TextField
+                  label="Origin"
+                  fullWidth
+                  variant="outlined"
                   value={origin}
                   onChange={(e) => setOrigin(e.target.value)}
                   required
+                  margin="normal"
                 />
-              </Form.Group>
-              <Form.Group controlId="destination">
-                <Form.Label style={labelStyle}>Destination</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter destination"
+                <TextField
+                  label="Destination"
+                  fullWidth
+                  variant="outlined"
                   value={destination}
                   onChange={(e) => setDestination(e.target.value)}
                   required
+                  margin="normal"
                 />
-              </Form.Group>
-              <Form.Group controlId="departureDate">
-                <Form.Label style={labelStyle}>Departure Date</Form.Label>
-                <Form.Control
+                <TextField
+                  label="Departure Date"
                   type="date"
+                  fullWidth
+                  variant="outlined"
+                  placeholder="dd-mm-yyyy" // Add the placeholder
                   value={departureDate}
                   onChange={(e) => setDepartureDate(e.target.value)}
                   required
+                  margin="normal"
+                  InputLabelProps={{ shrink: true }} // Ensure the label doesn't overlap with the placeholder
                 />
-              </Form.Group>
-              <Form.Group controlId="returnDate">
-                <Form.Label style={labelStyle}>Return Date</Form.Label>
-                <Form.Control
+                <TextField
+                  label="Return Date"
                   type="date"
+                  fullWidth
+                  variant="outlined"
                   value={returnDate}
                   onChange={(e) => setReturnDate(e.target.value)}
                   required
+                  margin="normal"
+                  InputLabelProps={{ shrink: true }} // Ensure the label doesn't overlap with the placeholder
                 />
-              </Form.Group>
-              <Button onClick={()=>window.location.href="/search/flightlist"} className='mt-3' variant="primary" type="submit" block>
-                Search Flights
-              </Button>
-            </Form>
-          </div>
-        </Col>
-      </Row>
-    </Container>
+                <Button
+                  variant="contained"
+                  color="error"
+                  type="submit"
+                  style={{ marginTop: '16px' }}
+                  fullWidth
+                  onClick={()=> window.location.href="/search/flightlist"}
+                >
+                  Search Flights
+                </Button>
+              </form>
+            </div>
+          </Grid>
+        </Grid>
+      </Container>
+      <Footer/>
     </div>
-    
   );
 }
 
-export default Searchflight;
+export default SearchFlight;

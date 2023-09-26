@@ -12,6 +12,11 @@ import FlightList from './components/Flightlist';
 import Seatbooking from './components/Seatbooking';
 import { ToastContainer, toast } from 'react-toastify';
 import Reservation from './components/Reservation';
+import Reservefare from './components/Reservefare';
+import Reserveflight from './components/Reserveflight';
+import BillingSection from './components/Billing';
+import UserDetails from './components/UserDetails';
+// import UserDetail from '../src/components/UserDetails'
 function App() {
   return (
     <div className="App">
@@ -27,7 +32,6 @@ function App() {
           pauseOnHover
           theme="light"
         />
-{/* Same as */}
 
       <Router>
     <Routes>
@@ -38,10 +42,18 @@ function App() {
       <Route path="/search" element={<Searchflight/>}/>
       <Route path="/search/flightlist" element={<FlightList/>}/>
       <Route path="/flightlist/seats" element={<Seatbooking/>}/>
+      <Route path="/seats" element={<Seatbooking/>}/>
       <Route path="/reservation" element={<Reservation/>}/>
+      <Route path="/reservation/reservefare" element={<Reservefare/>}/>
+      <Route path="/seats/reservefare" element={<Reservefare/>}/>
+      <Route path="/reservefare/billing" element={<BillingSection/>}/>
+      <Route path="/billing" element={<BillingSection/>}/>
+      <Route path="/search/resflightlist" element={<Reserveflight/>}/>
+      {/* <Route path="/userdetail" element={<UserDetail/>}/> */}
+      <Route path="/profile" element={<UserDetails/>}/>
     </Routes>
   </Router>
-  <ToastContainer/>
+
     </div>
   );
 }

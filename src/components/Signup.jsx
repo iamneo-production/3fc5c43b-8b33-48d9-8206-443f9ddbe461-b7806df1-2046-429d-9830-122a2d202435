@@ -1,87 +1,151 @@
 import React from 'react';
-import { Card, Form, Button, InputGroup, Row, Col } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  Card,
+  CardContent,
+  Typography,
+  TextField,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  Grid,
+  Link,
+  IconButton,
+} from '@mui/material';
 import { toast, ToastContainer } from 'react-toastify';
-  import "react-toastify/dist/ReactToastify.css";
+import 'react-toastify/dist/ReactToastify.css';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import GoogleIcon from '@mui/icons-material/Google';
+import GitHubIcon from '@mui/icons-material/GitHub';
+
 function SignUp() {
-  const handleSignup=()=>{
-    window.location.href="/login";
-  }
+  const handleSignup = () => {
+    window.location.href = '/login';
+  };
+
   const timeOut = () => {
     toast.success('Sign up successful!', {
-      position: "top-right",
+      position: 'top-right',
       autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "light",
-      });
-      setTimeout(()=>{
-        handleSignup();
-      },3000);
-      
+      theme: 'light',
+    });
+    setTimeout(() => {
+      handleSignup();
+    }, 3000);
   };
+
   return (
     <div className="log-det d-flex justify-content-center align-items-center vh-100">
       <Card style={{ width: '400px' }}>
-        <Card.Body style={{ border: 'none' }}>
-          <Card.Title className="text-center">Sign Up</Card.Title>
-          <Form>
-            <Form.Group className="mb-3">
-              <Form.Label>Name</Form.Label>
-              <Form.Control type="text" placeholder="Enter your name" />
-            </Form.Group>
+        <CardContent style={{ border: 'none' }}>
+          <Typography variant="h5" component="div" className="text-center">
+            Sign Up
+          </Typography>
+          <form>
+            <TextField
+              label="Name"
+              fullWidth
+              type="text"
+              placeholder="Enter your name"
+              variant="outlined"
+              margin="normal"
+              className="mb-3"
+            />
+            <TextField
+              label="Email address"
+              fullWidth
+              type="email"
+              placeholder="Enter email"
+              variant="outlined"
+              margin="normal"
+              className="mb-3"
+            />
+            <TextField
+              label="Password"
+              fullWidth
+              type="password"
+              placeholder="Enter password"
+              variant="outlined"
+              margin="normal"
+              className="mb-3"
+            />
+            <TextField
+              label="Confirm Password"
+              fullWidth
+              type="password"
+              placeholder="Confirm password"
+              variant="outlined"
+              margin="normal"
+              className="mb-3"
+            />
 
-            <Form.Group className="mb-3">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
-            </Form.Group>
+            <Grid container justifyContent="space-between" alignItems="center" className="mb-3">
+              <Grid item>
+                <FormControlLabel
+                  control={<Checkbox color="primary" />}
+                  label="I agree to the terms and conditions"
+                />
+              </Grid>
+            </Grid>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Enter password" />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Confirm Password</Form.Label>
-              <Form.Control type="password" placeholder="Confirm password" />
-            </Form.Group>
-
-            <Row className="mx-3 mb-3">
-              <Col className="d-flex justify-content-between align-items-center">
-                <Form.Check type="checkbox" label="I agree to the terms and conditions" />
-              </Col>
-            </Row>
-
-            <Button variant="danger" onClick={timeOut} className="mb-4 w-100">Sign Up</Button>
-
+            <Button
+              variant="contained"
+              color="error"
+              onClick={timeOut}
+              className="mb-4 w-100"
+            >
+              Sign Up
+            </Button>
             <div className="text-center">
-              <p>Already a member? <Button onClick={()=>window.location.href="/login"} style={{color:'red',backgroundColor:'white',border:'none',marginBottom:'5px'}}>Sign in</Button></p>
-              <p>or sign up with:</p>
+              <Typography>Already a member?</Typography>
+              <Button
+                onClick={() => (window.location.href = '/login')}
+                style={{
+                  color: 'red',
+                  backgroundColor: 'white',
+                  border: 'none',
+                  marginBottom: '5px',
+                }}
+              >
+                Sign in
+              </Button>
+              <Typography>or sign up with:</Typography>
 
-              <div className="d-flex justify-content-between mx-auto" style={{ width: '40%' }}>
-                <Button variant="outline-danger" className="log-hov m-1">
-                  <i className="fa fa-facebook fa-face"></i>
-                </Button>
+              <div className="d-flex justify-content-between mx-auto" style={{ width: '50%' }}>
+                <IconButton variant="outlined" className="log-hov m-1">
+                  <FacebookIcon style={{color:'GrayText'}} />
+                </IconButton>
 
-                <Button variant="outline-danger" className="log-hov m-1">
-                  <i className="fa fa-twitter fa-twit"></i>
-                </Button>
+                <IconButton variant="outlined" className="log-hov m-1">
+                  <TwitterIcon style={{color:'GrayText'}} />
+                </IconButton>
 
-                <Button variant="outline-danger" className="log-hov m-1">
-                  <i className="fa fa-google fa-goog"></i>
-                </Button>
+                <IconButton variant="outlined" className="log-hov m-1">
+                  <GoogleIcon style={{color:'GrayText'}} />
+                </IconButton>
 
-                <Button variant="outline-danger" className="log-hov m-1">
-                  <i className="fa fa-github fa-gith"></i>
-                </Button>
+                <IconButton variant="outlined" className="log-hov m-1">
+                  <GitHubIcon style={{color:'GrayText'}} />
+                </IconButton>
               </div>
             </div>
-          </Form>
-        </Card.Body>
+          </form>
+        </CardContent>
       </Card>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        closeOnClick
+        pauseOnHover
+        draggable
+        progressTheme="light"
+      />
     </div>
   );
 }

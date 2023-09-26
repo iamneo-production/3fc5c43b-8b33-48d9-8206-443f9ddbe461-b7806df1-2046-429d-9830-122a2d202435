@@ -1,88 +1,133 @@
 import React from 'react';
-import { Card, Form, Button, InputGroup, Row, Col } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import React from 'react';
+import {
+  Card,
+  CardContent,
+  Typography,
+  TextField,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  Grid,
+  Link,
+  IconButton,
+} from '@mui/material';
 import { toast, ToastContainer } from 'react-toastify';
-  import "react-toastify/dist/ReactToastify.css";
-function App() {
-  const handleLogin=()=>{
-    window.location.href="/home";
-  }
+import 'react-toastify/dist/ReactToastify.css';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import GoogleIcon from '@mui/icons-material/Google';
+import GitHubIcon from '@mui/icons-material/GitHub';
+
+export default function Login() {
+  const handleLogin = () => {
+    window.location.href = '/home';
+    
+  };
+
   const timeOut = () => {
+    
     toast.success('Sign in successful!', {
-      position: "top-right",
+      position: 'top-right',
       autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "light",
-      });
-      setTimeout(()=>{
-        handleLogin();
-      },3000);
-      
+      theme: 'light',
+    });
+    setTimeout(() => {
+      handleLogin();
+    }, 3000);
   };
+
   return (
     <div className="log-det d-flex justify-content-center align-items-center vh-100">
-      
       <Card style={{ width: '400px' }}>
-        <Card.Body style={{border:'none'}}>
-          <Card.Title className="text-center">Sign In</Card.Title>
-          <Form>
-            <Form.Group className="mb-4">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
-            </Form.Group>
+        <CardContent style={{ border: 'none' }}>
+          <Typography variant="h5" component="div" className="text-center">
+            Sign In
+          </Typography>
+          <form>
+            <TextField
+              label="Email address"
+              fullWidth
+              type="email"
+              placeholder="Enter email"
+              variant="outlined"
+              margin="normal"
+            />
+            <TextField
+              label="Password"
+              fullWidth
+              type="password"
+              placeholder="Password"
+              variant="outlined"
+              margin="normal"
+            />
+            <Grid container justifyContent="space-between" alignItems="center" className="mb-4">
+              <Grid item>
+                <FormControlLabel
+                  control={<Checkbox color="primary" />}
+                  label="Remember me"
+                />
+              </Grid>
+              <Grid item>
+                <Link href="!#" style={{ textDecoration: 'none', color: 'red' }}>
+                  Forgot password?
+                </Link>
+              </Grid>
+            </Grid>
 
-            <Form.Group className="mb-4">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
-            </Form.Group>
-
-            <Row className="mx-3 mb-4">
-              <Col className="d-flex justify-content-between align-items-center">
-                <Form.Check type="checkbox" label="Remember me" />
-                <a href="!#" style={{textDecoration:'none',color:'red'}}>Forgot password?</a>
-              </Col>
-            </Row>
-
-            <Button variant="danger" 
-            
-            onClick={timeOut} 
-            className="mb-4 w-100">
+            <Button
+              variant="contained"
+              color="error"
+              onClick={timeOut}
+              className="mb-4"
+              fullWidth
+            >
               Sign in
             </Button>
             <div className="text-center">
-              <p>Not a member? <Button onClick={()=>window.location.href="/signup"} style={{textDecoration:'none',color:'red',backgroundColor:'white',border:'none',marginBottom:'5px'}}>Register</Button></p>
-              <p>or sign up with:</p>
+              <Typography>Not a member?</Typography>
+              <Button
+                onClick={() => (window.location.href = '/signup')}
+                style={{
+                  textDecoration: 'none',
+                  color: 'red',
+                  backgroundColor: 'white',
+                  border: 'none',
+                  marginBottom: '5px',
+                }}
+              >
+                Register
+              </Button>
+              <Typography>or sign up with:</Typography>
 
-              <div className="d-flex justify-content-between mx-auto" style={{ width: '40%' }}>
-                <Button variant="outline-danger" className="log-hov m-1">
-                 {/* <FontAwesomeIcon icon="coffee" size="lg" /> */}
-                 <i className="fa fa-facebook fa-face"></i>
-                 {/* <FontAwesomeIcon icon="fa-brands fa-facebook" /> */}
-                </Button>
+              <div className="d-flex justify-content-between mx-auto" style={{ width: '50%' }}>
+                <IconButton variant="outlined" className="log-hov m-1">
+                  <FacebookIcon style={{color:'GrayText'}} />
+                </IconButton>
 
-                <Button variant="outline-danger" className="log-hov m-1">
-                  <i className="fa fa-twitter fa-twit" ></i>
-                </Button>
+                <IconButton variant="outlined" className="log-hov m-1">
+                  <TwitterIcon style={{color:'GrayText'}} />
+                </IconButton>
 
-                <Button variant="outline-danger" className="log-hov m-1">
-                  <i className="fa fa-google fa-goog" ></i>
-                </Button>
+                <IconButton variant="outlined" className="log-hov m-1">
+                  <GoogleIcon style={{color:'GrayText'}}/>
+                </IconButton>
 
-                <Button variant="outline-danger" className="log-hov m-1">
-                  <i className="fa fa-github fa-gith" ></i>
-                </Button>
+                <IconButton variant="outlined" className="log-hov m-1">
+                  <GitHubIcon style={{color:'GrayText'}}/>
+                </IconButton>
               </div>
             </div>
-          </Form>
-        </Card.Body>
+          </form>
+        </CardContent>
       </Card>
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} closeOnClick pauseOnHover draggable progressTheme="light" />
     </div>
   );
 }
 
-export default App;
+

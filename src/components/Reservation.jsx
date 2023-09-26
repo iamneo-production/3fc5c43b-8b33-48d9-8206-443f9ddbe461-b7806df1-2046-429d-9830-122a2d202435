@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Container, Form, Button, Row, Col,Card } from 'react-bootstrap';
+import { Container, Form, Row, Col,Card } from 'react-bootstrap';
+import { Button } from '@mui/material';
 import './styles/Reservation.css'; // Import your custom CSS file
 import Footer from './Footer';
 import Header from './Header';
@@ -11,6 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
 function Reservation() {
   const [passengerDetails, setPassengerDetails] = useState({
     name: '',
@@ -88,24 +90,20 @@ function Reservation() {
                                 </option>
                             ))}
                             </TextField>
-                            <TextField className='text-con' sx={{marginRight:'10px'}} gap={2} id="standard-basic" label="Departure" variant="standard" />
-                            <TextField id="text-con" sx={{marginRight:'10px'}} label="Arrival" variant="standard"/>
-                            <div className='d-flex justify-content-start mt-3'>
-                               <Row>
-                                 <Col>
-                                 <Form.Control
-                                  type="date"
-                                  name="datepic"
-                                  placeholder="DateRange"
-                                  value={date}
-                                  onChange={(e) => setDate(e.target.value)}
-                                 />
-                                </Col>
-                               </Row>
-                            </div>
+                            <TextField className='text-con' sx={{marginRight:'10px'}} gap={2} id="standard-basic" label="Departure time" variant="standard" />
+                            <TextField id="text-con" sx={{marginRight:'10px'}} label="Arrival time" variant="standard"/>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                             <DatePicker className="smallDatePicker" sx={{width:'80',fontSize:'12px',height:'20px'}} />
+                            </LocalizationProvider>
                        </div>
                        <div  style={{display:'flex',justifyContent:'center'}}>
-                       <Button className='res-btn btn-danger'>Search</Button>
+                       <Button
+                        variant="contained"
+                        color="error" // You can use 'error' for red, or choose another color
+                        onClick={()=>window.location.href = '/search/resflightlist'}
+                       >
+                        Search
+                      </Button>
                        </div>
                        
                       </Card.Body>
@@ -118,7 +116,7 @@ function Reservation() {
                 <Col>
                    <Carousels/>
                 </Col>
-            </Row>
+        </Row>
     </div>
   );
 }
