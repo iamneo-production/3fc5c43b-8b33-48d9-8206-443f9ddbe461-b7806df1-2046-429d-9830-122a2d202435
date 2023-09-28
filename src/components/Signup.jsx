@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Card,
   CardContent,
@@ -19,11 +19,23 @@ import GoogleIcon from '@mui/icons-material/Google';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
 function SignUp() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
+
   const handleSignup = () => {
+    // Redirect to login page
     window.location.href = '/login';
   };
 
   const timeOut = () => {
+    // Save user details to local storage
+    localStorage.setItem('userEmail', formData.email);
+    localStorage.setItem('userPassword', formData.password);
+    
     toast.success('Sign up successful!', {
       position: 'top-right',
       autoClose: 3000,
@@ -34,9 +46,24 @@ function SignUp() {
       progress: undefined,
       theme: 'light',
     });
+
     setTimeout(() => {
       handleSignup();
     }, 3000);
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Perform signup logic here if needed
+    timeOut();
   };
 
   return (
@@ -46,7 +73,7 @@ function SignUp() {
           <Typography variant="h5" component="div" className="text-center">
             Sign Up
           </Typography>
-          <form>
+          <form onSubmit={handleSubmit}>
             <TextField
               label="Name"
               fullWidth
@@ -55,6 +82,10 @@ function SignUp() {
               variant="outlined"
               margin="normal"
               className="mb-3"
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
+              required
             />
             <TextField
               label="Email address"
@@ -64,6 +95,10 @@ function SignUp() {
               variant="outlined"
               margin="normal"
               className="mb-3"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              required
             />
             <TextField
               label="Password"
@@ -73,6 +108,10 @@ function SignUp() {
               variant="outlined"
               margin="normal"
               className="mb-3"
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              required
             />
             <TextField
               label="Confirm Password"
@@ -82,6 +121,10 @@ function SignUp() {
               variant="outlined"
               margin="normal"
               className="mb-3"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleInputChange}
+              required
             />
 
             <Grid container justifyContent="space-between" alignItems="center" className="mb-3">
@@ -96,7 +139,7 @@ function SignUp() {
             <Button
               variant="contained"
               color="error"
-              onClick={timeOut}
+              type="submit"
               className="mb-4 w-100"
             >
               Sign Up
@@ -118,19 +161,19 @@ function SignUp() {
 
               <div className="d-flex justify-content-between mx-auto" style={{ width: '50%' }}>
                 <IconButton variant="outlined" className="log-hov m-1">
-                  <FacebookIcon style={{color:'GrayText'}} />
+                  <FacebookIcon style={{ color: 'GrayText' }} />
                 </IconButton>
 
                 <IconButton variant="outlined" className="log-hov m-1">
-                  <TwitterIcon style={{color:'GrayText'}} />
+                  <TwitterIcon style={{ color: 'GrayText' }} />
                 </IconButton>
 
                 <IconButton variant="outlined" className="log-hov m-1">
-                  <GoogleIcon style={{color:'GrayText'}} />
+                  <GoogleIcon style={{ color: 'GrayText' }} />
                 </IconButton>
 
                 <IconButton variant="outlined" className="log-hov m-1">
-                  <GitHubIcon style={{color:'GrayText'}} />
+                  <GitHubIcon style={{ color: 'GrayText' }} />
                 </IconButton>
               </div>
             </div>

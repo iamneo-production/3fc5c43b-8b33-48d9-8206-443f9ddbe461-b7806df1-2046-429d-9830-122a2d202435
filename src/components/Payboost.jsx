@@ -1,36 +1,78 @@
-import React from 'react'
-import { Col, Container, Image, Row } from 'react-bootstrap'
-import pay from '../images/payimg.png'
+import React from 'react';
+import { Container, Grid, Typography, Button, Paper } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import pay from '../images/payimg.png';
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    margin: '5 1rem',
+  },
+  imageContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    padding: '1rem',
+  },
+  image: {
+    maxWidth: '100%',
+    height: 'auto',
+  },
+  textContainer: {
+    textAlign: 'left',
+    padding: '1rem',
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: '1.5rem',
+  },
+  content: {
+    fontSize: '1rem',
+  },
+  button: {
+    backgroundColor: 'red',
+    border: 'none',
+    fontWeight: 'bold',
+    color: 'white',
+    padding: '0.5rem 1rem',
+    textDecoration: 'none',
+    '&:hover': {
+      backgroundColor: 'red', // Set the hover color to red
+    }
+  },
+}));
 
 export default function Payboost() {
+  const classes = useStyles();
+
   return (
     <div>
-    <Container className='mx-4'>
-       <Row>
-        <Col className='d-flex justify-content-center p-2'>
-            <Image src={pay} alt="payments" fluid/>
-        </Col>
-        <Col className='d-flex justify-content-center p-2'>
-             <div className='text-sec' style={{textAlign:'left'}}>
-                 <h3 className='tit-pay'>Boost your balance every day</h3>
-                 <br/>
-                 <p className='con-pay' style={{textAlign:'left'}}>
-                 Every neoair Point you earn through Flying Club and neoair combines into a single balance
-                 </p>
-                 <br/>
-                 <h3 className='tit-pay'>More ways to spend your points</h3>
-                 <p className='con-pay'>
-                 Starting at just 200 neoair Points choose from little treats, neo exclusives and VIP concerts.
-                 </p>
-                 <p className='con-pay'>
-                    <a href='#' alt="red">
-                    <span class="btn btn-secondary" style={{backgroundColor:'red',border:'none',fontWeight:'bold'}}>Show me more about neoair</span>
-                    </a>
-                 </p>
-             </div>
-        </Col>
-       </Row>
-    </Container>
+      <Container className={classes.container}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={6} className={classes.imageContainer}>
+            <Paper elevation={3}>
+              <img src={pay} alt="payments" className={classes.image} />
+            </Paper>
+          </Grid>
+          <Grid item xs={12} md={6} className={classes.textContainer}>
+            <Typography variant="h3" className={classes.title}>
+              Boost your balance every day
+            </Typography>
+            <br />
+            <Typography variant="body1" className={classes.content}>
+              Every neoair Point you earn through Flying Club and neoair combines into a single balance
+            </Typography>
+            <br />
+            <Typography variant="h3" className={classes.title}>
+              More ways to spend your points
+            </Typography>
+            <Typography variant="body1" className={classes.content}>
+              Starting at just 200 neoair Points, choose from little treats, neo exclusives, and VIP concerts.
+            </Typography>
+            <Button href="#" variant="contained" className={classes.button}>
+              Show me more about neoair
+            </Button>
+          </Grid>
+        </Grid>
+      </Container>
     </div>
-  )
+  );
 }

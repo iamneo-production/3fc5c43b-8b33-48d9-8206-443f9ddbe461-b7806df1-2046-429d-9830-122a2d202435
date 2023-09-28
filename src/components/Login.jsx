@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Card,
   CardContent,
@@ -18,27 +18,70 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import GoogleIcon from '@mui/icons-material/Google';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
-export default function Login() {
+function Login() {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+
   const handleLogin = () => {
+    // Redirect to home page
     window.location.href = '/home';
-    
   };
 
   const timeOut = () => {
-    
-    toast.success('Sign in successful!', {
-      position: 'top-right',
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: 'light',
+    // Check user details in local storage
+    const storedEmail = localStorage.getItem('userEmail');
+    const storedPassword = localStorage.getItem('userPassword');
+
+    // Check if the stored details match the input fields
+    if (
+      storedEmail === formData.email &&
+      storedPassword === formData.password
+    ) {
+      // Successful login
+      toast.success('Sign in successful!', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+      setTimeout(()=>{
+        handleLogin();
+      },3000);
+      
+    } else {
+      // Invalid login
+      console.log(storedEmail+" "+storedPassword);
+      toast.error('Invalid login credentials', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+    }
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
     });
-    setTimeout(() => {
-      handleLogin();
-    }, 3000);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Perform login logic here
+    timeOut();
   };
 
   return (
@@ -48,7 +91,7 @@ export default function Login() {
           <Typography variant="h5" component="div" className="text-center">
             Sign In
           </Typography>
-          <form>
+          <form onSubmit={handleSubmit}>
             <TextField
               label="Email address"
               fullWidth
@@ -56,6 +99,10 @@ export default function Login() {
               placeholder="Enter email"
               variant="outlined"
               margin="normal"
+              className="mb-3"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
             />
             <TextField
               label="Password"
@@ -64,6 +111,9 @@ export default function Login() {
               placeholder="Password"
               variant="outlined"
               margin="normal"
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
             />
             <Grid container justifyContent="space-between" alignItems="center" className="mb-4">
               <Grid item>
@@ -82,7 +132,7 @@ export default function Login() {
             <Button
               variant="contained"
               color="error"
-              onClick={timeOut}
+              type="submit"
               className="mb-4"
               fullWidth
             >
@@ -106,28 +156,36 @@ export default function Login() {
 
               <div className="d-flex justify-content-between mx-auto" style={{ width: '50%' }}>
                 <IconButton variant="outlined" className="log-hov m-1">
-                  <FacebookIcon style={{color:'GrayText'}} />
+                  <FacebookIcon style={{ color: 'GrayText' }} />
                 </IconButton>
 
                 <IconButton variant="outlined" className="log-hov m-1">
-                  <TwitterIcon style={{color:'GrayText'}} />
+                  <TwitterIcon style={{ color: 'GrayText' }} />
                 </IconButton>
 
                 <IconButton variant="outlined" className="log-hov m-1">
-                  <GoogleIcon style={{color:'GrayText'}}/>
+                  <GoogleIcon style={{ color: 'GrayText' }} />
                 </IconButton>
 
                 <IconButton variant="outlined" className="log-hov m-1">
-                  <GitHubIcon style={{color:'GrayText'}}/>
+                  <GitHubIcon style={{ color: 'GrayText' }} />
                 </IconButton>
               </div>
             </div>
           </form>
         </CardContent>
       </Card>
-      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} closeOnClick pauseOnHover draggable progressTheme="light" />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        closeOnClick
+        pauseOnHover
+        draggable
+        progressTheme="light"
+      />
     </div>
   );
 }
 
-
+export default Login;

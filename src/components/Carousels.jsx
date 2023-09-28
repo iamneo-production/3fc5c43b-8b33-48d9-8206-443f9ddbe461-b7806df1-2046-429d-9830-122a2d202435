@@ -1,52 +1,100 @@
-import React from 'react'
-import {Row,Col,Carousel,Button} from 'react-bootstrap'
-import ban1 from '../images/sleep.jpg'
-import ban2 from '../images/banner1.jpg'
-import ban3 from '../images/banner2.jpg'
-export default function Carousels() {
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import { Grid, Typography, Button } from '@material-ui/core';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+
+import ban1 from '../images/sleep.jpg';
+import ban2 from '../images/banner1.jpg';
+import ban3 from '../images/banner2.jpg';
+
+const useStyles = makeStyles((theme) => ({
+  carousel: {
+    marginTop: theme.spacing(2),
+  },
+  carouselImage: {
+    width: '100%',
+    height: 'auto',
+  },
+  carouselCaption: {
+    // backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    color: 'white',
+    padding: theme.spacing(2),
+    textAlign: 'left', // Align text to the left
+    position: 'absolute',
+    top: '50%', // Center vertically from the top
+    left: '10%', // Move slightly to the left
+    transform: 'translateY(-50%)', // Center vertically
+  },
+  captionTitle: {
+    fontSize: '24px',
+    fontWeight: 'bold',
+  },
+  captionText: {
+    fontSize: '20px',
+  },
+  exploreButton: {
+    backgroundColor: 'red',
+    color: 'white',
+    border: 'none',
+    fontWeight: 'bold',
+  },
+}));
+
+export default function MaterialUICarousel() {
+  const classes = useStyles();
+
+  const items = [
+    {
+      img: ban1,
+      title: 'Book Your Flight',
+      description: 'Find the best deals and book your next flight with ease.',
+    },
+    {
+      img: ban2,
+      title: 'Travel Insurance',
+      description: 'Protect your trip with our comprehensive travel insurance plans.',
+    },
+    {
+      img: ban3,
+      title: 'Take a trip',
+      description: "Explore Antigua's 365 beaches from 20,000 points^",
+    },
+  ];
+
   return (
     <div>
-        <Row className='mt-2'>
-        <Col>
-          <Carousel>
-            <Carousel.Item>
+      <Grid container className={classes.carousel}>
+        <Carousel showThumbs={false}>
+          {items.map((item, index) => (
+            <div key={index}>
               <img
-                className="d-block w-100"
-                src={ban1}
-                alt="First slide"
+                className={classes.carouselImage}
+                src={item.img}
+                alt={`Slide ${index + 1}`}
               />
-              <Carousel.Caption>
-                <h3>Book Your Flight</h3>
-                <p>Find the best deals and book your next flight with ease.</p>
-                <Button style={{backgroundColor:'red',border:'none',fontWeight:'bold'}}>Explore our cabins and seats</Button>
-             </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-              <img
-                className="d-block w-100"
-                src={ban2}
-                alt="Second slide"
-              />
-              <Carousel.Caption>
-                <h3>Travel Insurance</h3>
-                <p style={{fontSize:'20px'}}>Protect your trip with our comprehensive travel insurance plans.</p>
-                <Button style={{backgroundColor:'red',border:'none',fontWeight:'bold'}}>Explore more <i className="fa fa-rightarrow-r fa-lg"></i></Button>
-              </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-              <img
-                className="d-block w-100"
-                src={ban3}
-                alt="Third slide"
-              />
-              <Carousel.Caption>
-                <h3>Take a trip</h3>
-                <p>Explore Antigua's 365 beaches from 20,000 points^</p>
-              </Carousel.Caption>
-            </Carousel.Item>
-          </Carousel>
-        </Col>
-      </Row>
+              <div className={classes.carouselCaption}>
+                <Typography variant="h3" className={classes.captionTitle}>
+                  {item.title}
+                </Typography>
+                <Typography variant="body1" className={classes.captionText}>
+                  {item.description}
+                </Typography>
+                {index === 0 && (
+                  <Button className={classes.exploreButton}>
+                    Explore our cabins and seats
+                  </Button>
+                )}
+                {index === 1 && (
+                  <Button className={classes.exploreButton}>
+                    Explore more <i className="fa fa-rightarrow-r fa-lg"></i>
+                  </Button>
+                )}
+              </div>
+            </div>
+          ))}
+        </Carousel>
+      </Grid>
     </div>
-  )
+  );
 }

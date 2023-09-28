@@ -43,7 +43,8 @@ function App() {
       <Route path="/search/flightlist" element={<FlightList/>}/>
       <Route path="/flightlist/seats" element={<Seatbooking/>}/>
       <Route path="/seats" element={<Seatbooking/>}/>
-      <Route path="/reservation" element={<Reservation/>}/>
+      <Route path="/mybooking" element={<Reservation/>}/>
+      <Route path="/" element={<Reservation/>}/>
       <Route path="/reservation/reservefare" element={<Reservefare/>}/>
       <Route path="/seats/reservefare" element={<Reservefare/>}/>
       <Route path="/reservefare/billing" element={<BillingSection/>}/>

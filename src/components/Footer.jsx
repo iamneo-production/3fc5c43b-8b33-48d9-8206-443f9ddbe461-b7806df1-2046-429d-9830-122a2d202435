@@ -1,26 +1,30 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Grid, Typography } from '@material-ui/core';
 
 function Footer() {
   return (
-    <footer className="foot-con" style={{backgroundColor:'#F2F2F2',color:'black'}}>
+    <footer style={{ backgroundColor: '#F2F2F2', color: 'black' }}>
       <Container>
-        <Row className="py-4">
-          <Col md={4} sm={12}>
-            <h5>Payment Methods</h5>
-            <div className="d-flex justify-content-center">
+        <Grid container spacing={3} justify="space-between">
+          <Grid item xs={12} sm={4}>
+            <Typography variant="h6">Payment Methods</Typography>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
               <i className="fa fa-cc-visa fa-2x me-3"></i>
               <i className="fa fa-cc-mastercard fa-2x me-3"></i>
               <i className="fa fa-cc-paypal fa-2x me-3"></i>
             </div>
-          </Col>
-          <Col md={4} sm={12} style={{fontWeight:'500'}}>
-            <h5>Contact Us</h5>
-            <p>7th cross street CA<br />City, Country<br />Phone: (+91) 900-386-7705</p>
-          </Col>
-          <Col md={4} sm={12}>
-            <h5>Follow Us</h5>
-            <div className="d-flex justify-content-center">
+          </Grid>
+          <Grid item xs={12} sm={4} style={{ fontWeight: '500' }}>
+            <Typography variant="h6">Contact Us</Typography>
+            <Typography>
+              7th cross street CA<br />
+              City, Country<br />
+              Phone: (+91) 900-386-7705
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <Typography variant="h6">Follow Us</Typography>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
               <a href="#!" className="text-dark me-3">
                 <i className="fa fa-facebook-f fa-lg"></i>
               </a>
@@ -31,12 +35,16 @@ function Footer() {
                 <i className="fa fa-instagram fa-lg"></i>
               </a>
             </div>
-          </Col>
-        </Row>
+          </Grid>
+        </Grid>
       </Container>
-      <div className="text-center p-3" style={{backgroundColor:'#F2F2F2'}}>
+      <Typography
+        variant="body2"
+        align="center"
+        style={{ backgroundColor: '#F2F2F2', padding: '1rem' }}
+      >
         &copy; {new Date().getFullYear()} Neoairline. All Rights Reserved.
-      </div>
+      </Typography>
     </footer>
   );
 }

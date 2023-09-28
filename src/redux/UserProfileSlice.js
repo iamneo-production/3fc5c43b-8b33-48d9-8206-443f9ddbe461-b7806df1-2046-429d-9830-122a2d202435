@@ -13,10 +13,7 @@ const userProfileSlice = createSlice({
       state.user = action.payload;
     },
     addUserProfile: (state,action)=>{
-        state.user=[
-          ...state.user,
-          {name:action.payload.name,email:action.payload.email,phno:action.payload.phno}
-        ]
+        state.user=action.payload;
     }
   },
 });

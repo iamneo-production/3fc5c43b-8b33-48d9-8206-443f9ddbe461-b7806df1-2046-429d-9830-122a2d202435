@@ -1,63 +1,196 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import '../App.css'
-import hicon from '../images/neo.png'
+import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import { pink } from '@mui/material/colors';
+// Typography
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  Menu,
+  MenuItem,
+  Button, // Import Button component
+} from '@material-ui/core';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import hicon from '../images/NavLogo.png';
+import { Typography } from '@mui/material';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  appBar: {
+    backgroundColor: 'white',
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up('lg')]: {
+      display: 'none', // Hide the hamburger menu on large screens
+    },
+  },
+  title: {
+    flexGrow: 1,
+    fontWeight: 'bold',
+  },
+  drawerPaper: {
+    width: 250,
+  },
+  navLinks: {
+    [theme.breakpoints.down('md')]: {
+      display: 'none', // Hide the buttons on medium and smaller screens
+    },
+  },
+  button: {
+    marginRight: theme.spacing(2),
+    color: 'black',
+    fontWeight: 'bold',
+  },
+}));
+
 function Header() {
-  const styles={
-    color: '#61126B',
-    fontWeight:'560',
-    marginLeft:'10px'
-  }
-  const navStyles={
-      fontWeight:'480',
-      color:'#61126B',
-      marginLeft:'10px' 
-  }
-  const btlog={
-    backgroundColor:'#BD1635',
-    color:'white',
-    marginLeft:'18px',
-    fontWeight:'560',
-    borderRadius:'7px',
-    paddingLeft:'10px',
-    paddingRight:'10px',
-    paddingTop:'6px',
-    paddingBottom:'0px'
-  }
-  const navigateToLogin=()=>{
-       window.location.href="/login";
-  }
+  const classes = useStyles();
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  const navigateToLogin = () => {
+    window.location.href = '/login';
+  };
+
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const menuItems = [
+    'Book',
+    'My Booking',
+    'Check in',
+    'Reservation',
+    'Destination & onboard',
+    'Help',
+    'Flying club',
+    'Deals',
+    'Join',
+  ];
+
   return (
-    <Navbar expand="lg" className="bg-body-tertiary" style={{backgroundColor:'black'}}>
-      <Container>
-       
-        <Navbar.Brand href="/home">
-        <img src={hicon} 
-        width="100"
-        height="25"
-        className="d-inline-block align-top"
-        alt="Your Logo"
-        />
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="nav me-4 mx-4">
-            <Nav.Link href="/search" style={styles}>Book</Nav.Link>
-            <Nav.Link href="#link" style={styles}>My Booking</Nav.Link>
-            <Nav.Link href="#home" style={styles}>Check in</Nav.Link>
-            <Nav.Link href="/reservation" style={styles}>Reservation</Nav.Link>
-            <Nav.Link href="#home" style={navStyles}>Destination & onboard</Nav.Link>
-            <Nav.Link href="#link" style={navStyles}>Help</Nav.Link>
-            <Nav.Link href="#link" style={navStyles}>Flying club</Nav.Link>  
-            <Nav.Link href="#link" style={navStyles}>Deals</Nav.Link>
-            <Nav.Link href="#link" style={styles} className='sep'>Join</Nav.Link> 
-            <Nav.Link href="#link" style={btlog} onClick={navigateToLogin} >Log in</Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <div className={classes.root}>
+      <AppBar position="static" className={classes.appBar}>
+        <Toolbar>
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+            onClick={handleDrawerToggle}
+          >
+            <MenuOpenIcon sx={{ color: pink[500] }}/>
+          </IconButton>
+          <Typography variant="h6" className={classes.title}>
+            <img
+              src={hicon}
+              width="100"
+              height="70"
+              className="d-inline-block align-top"
+              alt="Your Logo"
+            />
+          </Typography>
+          <div className={classes.navLinks}>
+            <Button className={classes.button} href="/home">
+              Home
+            </Button>
+            <Button className={classes.button} href="/search">
+              Book
+            </Button>
+            <Button className={classes.button} href="/mybooking">
+              My Booking
+            </Button>
+            <Button className={classes.button} href="#home">
+              Check in
+            </Button>
+            <Button className={classes.button} href="/search">
+              Reservation
+            </Button>
+            <Button className={classes.button} href="#home">
+              Destination & onboard
+            </Button>
+            <Button className={classes.button} href="#link">
+              Join
+            </Button>
+            <Button className={classes.button} onClick={navigateToLogin}>
+              Log in
+            </Button>
+          </div>
+          {mobileOpen && (
+            <>
+              <IconButton
+                edge="end"
+                color="inherit"
+                aria-label="menu"
+                onClick={handleMenuOpen}
+              >
+                <MenuOpenIcon sx={{ color: pink[500] }}/>
+              </IconButton>
+              <Menu
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleMenuClose}
+              >
+                {menuItems.map((text, index) => (
+                  <MenuItem key={text} onClick={handleMenuClose}>
+                    {text}
+                  </MenuItem>
+                ))}
+                <MenuItem onClick={navigateToLogin}>Log in</MenuItem>
+              </Menu>
+            </>
+          )}
+        </Toolbar>
+      </AppBar>
+      <Drawer
+        anchor="left"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+      >
+        <List>
+          {menuItems.map((text, index) => (
+            <ListItem
+              button
+              key={text}
+              onClick={() => {
+                handleDrawerToggle();
+                navigateToLogin();
+              }}
+            >
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
+          <ListItem
+            button
+            onClick={() => {
+              handleDrawerToggle();
+              navigateToLogin();
+            }}
+          >
+            <ListItemText primary="Log in" />
+          </ListItem>
+        </List>
+      </Drawer>
+    </div>
   );
 }
 

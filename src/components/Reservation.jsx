@@ -1,23 +1,25 @@
+// Reservation.js
 import React, { useState } from 'react';
-import { Container, Form, Row, Col,Card } from 'react-bootstrap';
-import { Button } from '@mui/material';
+import { Container, Paper, Typography, TextField, Button, CardContent } from '@mui/material';
 import './styles/Reservation.css'; // Import your custom CSS file
-import Footer from './Footer';
 import Header from './Header';
-import Adcontent from './Adcontent';
 import Carousels from './Carousels';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs from 'dayjs';
+// import { useHistory } from 'react-router-dom';
 
 function Reservation() {
+  // const history = useHistory();
+
   const [passengerDetails, setPassengerDetails] = useState({
     name: '',
-    age: '',
-    // Add more passenger details as needed
+    email: '',
+    password: '',
+    departureTime: '',
+    arrivalTime: '',
   });
 
   const handleInputChange = (e) => {
@@ -26,97 +28,117 @@ function Reservation() {
       ...passengerDetails,
       [name]: value,
     });
+    // console.log(name+" "+password);
+  };
+
+  const validateUser = (email, password) => {
+    // Retrieve user data from local storage or any other source
+    const storedEmail = localStorage.getItem('userEmail');
+    const storedPassword = localStorage.getItem('userPassword');
+    console.log(storedEmail+" "+storedPassword);
+    return email === storedEmail && password === storedPassword;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission, calculate fare, and guide through payment process
-    console.log('Passenger Details:', passengerDetails);
-    // Add your logic for calculating the fare and payment process here
-  };
-  const currencies = [
-    {
-      value: 'Booking',
-      label: 'Adult',
-    },
-    {
-      value: 'E',
-      label: 'Children',
-    },
-    {
-      value: 'E',
-      label: 'Senior',
+
+    const { email, password,name } = passengerDetails;
+    const storeName = localStorage.setItem('userName', passengerDetails.name)
+
+    // console.log(email+" "+password+" "+storeName);
+    if (validateUser(email, password)) {
+      // Redirect to UserProfile page
+        window.location.href="/profile"
+    } else {
+      // Show an error message to the user
+      console.log(validateUser(email, password));
+      console.log('Invalid email or password');
+      // window.location.href="/signup"
+      
     }
-  ];
-  const [date, setDate] = useState(new Date());
+  };
+
+  const [date, setDate] = useState(dayjs()); // Initialize with the current date
+
   return (
     <div>
-        <Box
-            component="form"
-            sx={{
-                '& > :not(style)': { m: 1, width: '25px' },
-            }}
-            noValidate
-            autoComplete="off"
-            ></Box>
-        <Header/>
-        <Container>
-            <Row className='mb-4'>
-            <p className='res-con'>Find your flight</p>
-                <Col className='con-text d-flex justify-content-center'>
-                    
-                    <Card style={{ width: '60rem' }}>
-                        <Card.Body>
-                            <Card.Title className='res-tit'>Look up a booking</Card.Title>
-                            <Card.Text className='res-tex'>
-                            Enter your information to look up a trip. You can search by booking reference or eTicket number.
-                            All fields are required
-                            </Card.Text>
-                            <p className='res-p'>Find your trip by</p>
-                            <div>
-                            <TextField
-                            id="filled-select-currency-native"
-                            select
-                            defaultValue="EUR"
-                            SelectProps={{
-                                native: true,
-                            }}
-                            variant="filled"
-                            sx={{marginRight:'10px'}}
-                            >
-                            {currencies.map((option) => (
-                                <option key={option.value} value={option.value}>
-                                {option.label}
-                                </option>
-                            ))}
-                            </TextField>
-                            <TextField className='text-con' sx={{marginRight:'10px'}} gap={2} id="standard-basic" label="Departure time" variant="standard" />
-                            <TextField id="text-con" sx={{marginRight:'10px'}} label="Arrival time" variant="standard"/>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                             <DatePicker className="smallDatePicker" sx={{width:'80',fontSize:'12px',height:'20px'}} />
-                            </LocalizationProvider>
-                       </div>
-                       <div  style={{display:'flex',justifyContent:'center'}}>
-                       <Button
-                        variant="contained"
-                        color="error" // You can use 'error' for red, or choose another color
-                        onClick={()=>window.location.href = '/search/resflightlist'}
-                       >
-                        Search
-                      </Button>
-                       </div>
-                       
-                      </Card.Body>
-                    </Card>
-                </Col>
-                
-            </Row>
-        </Container>
-        <Row>
-                <Col>
-                   <Carousels/>
-                </Col>
-        </Row>
+      <Header />
+      <Box
+        component="form"
+        sx={{
+          '& > :not(style)': { m: 1, width: '25px' },
+        }}
+        noValidate
+        autoComplete="off"
+      ></Box>
+      
+      <Container>
+        <Paper sx={{ width: '60rem', margin: 'auto',marginTop:'10px' }}>
+          <CardContent>
+            <Typography variant="h5" className="res-tit">
+              Look up a booking
+            </Typography>
+            <Typography variant="body2" className="res-tex">
+              Enter your information to look up a trip. You can search by booking reference or eTicket number. All fields are required.
+            </Typography>
+            <div>
+              <TextField
+                fullWidth
+                label="Email"
+                variant="standard"
+                name="email"
+                value={passengerDetails.email}
+                onChange={handleInputChange}
+              />
+              <TextField
+                fullWidth
+                label="Name"
+                variant="standard"
+                name="name"
+                value={passengerDetails.name}
+                onChange={handleInputChange}
+              />
+              <TextField
+                fullWidth
+                label="Password"
+                variant="standard"
+                type="password"
+                name="password"
+                value={passengerDetails.password}
+                onChange={handleInputChange}
+              />
+              <TextField
+                fullWidth
+                label="Departure time"
+                variant="standard"
+                type="time"
+                name="departureTime"
+                value={passengerDetails.departureTime}
+                onChange={handleInputChange}
+              />
+              <TextField
+                fullWidth
+                label="Arrival time"
+                variant="standard"
+                type="time"
+                name="arrivalTime"
+                value={passengerDetails.arrivalTime}
+                onChange={handleInputChange}
+                sx={{ marginBottom: '20px' }}
+              />
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker fullWidth label="Select Date" value={date} onChange={(newDate) => setDate(newDate)} />
+              </LocalizationProvider>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
+              <Button variant="contained" color="error" onClick={handleSubmit}>
+                Search
+              </Button>
+            </div>
+          </CardContent>
+        </Paper>
+      </Container>
+      <Carousels />
     </div>
   );
 }

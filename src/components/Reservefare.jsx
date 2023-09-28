@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {
   Container,
   Paper,
@@ -14,16 +14,23 @@ import {
 import { Chair, Payment } from '@mui/icons-material';
 import Header from './Header';
 import Footer from './Footer';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { updateUserProfile } from '../redux/UserProfileSlice';
 function FlightBookingApp() {
   const [passengerDetails, setPassengerDetails] = useState({
     name: '',
     age: '',
+    email:''
   });
-
+  
   const [ticketType, setTicketType] = useState('adult');
   const [meal,setMeal] = useState('veg');
   const [chair,setChair]=useState('yes');
+
+  // Dispatch
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.userProfile.user);
+  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setPassengerDetails({
@@ -31,7 +38,7 @@ function FlightBookingApp() {
       [name]: value,
     });
   };
-
+  
   const handleTicketTypeChange = (e) => {
     setTicketType(e.target.value);
   };
@@ -63,14 +70,14 @@ function FlightBookingApp() {
     const chairFare = wheelChair[chair]
     let sumAllfare = baseFare+mealFare+chairFare;
     let gst=sumAllfare*(0.2);
-    sumAllfare+=gst;
+    sumAllfare=sumAllfare+gst;
     // Additional services or preferences can be factored in here
     // For example, meal options, seat selection, etc.
 
     // Calculate total fare
     return sumAllfare; // Replace with actual calculation
   };
-
+   
   const handleSubmit = (e) => {
     e.preventDefault();
     const totalFare = calculateTotalFare();
@@ -78,9 +85,24 @@ function FlightBookingApp() {
     // In a real application, you would typically handle payment processing here
     // You can integrate with payment gateways like Stripe, PayPal, etc.
     // For this example, we'll just display the total fare.
-     
+    dispatch(updateUserProfile(passengerDetails));
+    localStorage.setItem('userProfile', JSON.stringify(passengerDetails));
     alert(`Total Fare: $${totalFare}`);
+    alert(`Details are storedInLocal:`);
   };
+
+
+  // Show the userDetails
+
+  // useEffect(() => {
+  //   // Retrieve data from local storage when the component mounts
+  //   const storedName = localStorage.getItem('name');
+  //   const storedEmail = localStorage.getItem('email');
+  //   console.log(storedName+" "+storedEmail);
+  //   // If data exists in local storage, set it in the component state
+    
+  // }, []);
+
 
   return (
     <div>
@@ -106,6 +128,19 @@ function FlightBookingApp() {
                   fullWidth
                   variant="outlined"
                   name="name"
+                  value={passengerDetails.name}
+                  onChange={handleInputChange}
+                  required
+                  sx={{width:'100'}}
+                />
+              </Grid>
+              <Grid item xs={12}  
+            >
+                <TextField
+                  label="Email"
+                  fullWidth
+                  variant="outlined"
+                  name="email"
                   value={passengerDetails.name}
                   onChange={handleInputChange}
                   required
